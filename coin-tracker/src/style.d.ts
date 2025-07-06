@@ -7,8 +7,9 @@ import "styled-components";
 // and extend the stype components' definition with my own theme.
 declare module "styled-components" {
   export interface DefaultTheme {
-    btnColor: string;
+    accentColor: string;
     textColor: string;
     bgColor: string;
+    accentTextColor: string;
   }
 }

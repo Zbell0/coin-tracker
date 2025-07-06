@@ -1,12 +1,21 @@
-# React + Vite
+# react-learning
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository documents my journey of learning React and modern front-end development practices. It includes small experiments and practical implementations using tools like **styled-components**, **TypeScript**, **React hooks**, and **ThemeProvider**.
 
-Currently, two official plugins are available:
+I created this space to explore and solidify core concepts such as component styling, animations, form handling, theme integration, and type-safe design patterns in React. Each commit in this project corresponds to a new concept or technique I've studied, starting from basic styled components to more advanced usage like keyframes animations, theme extension, and typed props.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Topics Covered
 
-## Expanding the ESLint configuration
+- Styled-components fundamentals (props, .attrs, polymorphism)
+- CSS animations using keyframes
+- React forms with controlled inputs
+- ThemeProvider and dynamic theming (light/dark mode)
+- TypeScript integration with styled-components
+- Declaration merging to extend theme types
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech Stack
+
+- React
+- TypeScript
+- styled-components
+
