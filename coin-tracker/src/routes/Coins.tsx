@@ -1,8 +1,11 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
   padding: 0px 10px;
+  max-width: 480px;
+  margin: 0 auto;
 `;
 const Title = styled.h1`
   font-size: 48px;
@@ -33,49 +36,43 @@ const Coin = styled.li`
   }
 `;
 
-const coins = [
-  {
-    id: "btc-bitcoin",
-    name: "Bitcoin",
-    symbol: "BTC",
-    rank: 1,
-    is_new: false,
-    is_active: true,
-    type: "coin",
-  },
-  {
-    id: "eth-ethereum",
-    name: "Ethereum",
-    symbol: "ETH",
-    rank: 2,
-    is_new: false,
-    is_active: true,
-    type: "coin",
-  },
-  {
-    id: "hex-hex",
-    name: "HEX",
-    symbol: "HEX",
-    rank: 3,
-    is_new: false,
-    is_active: true,
-    type: "token",
-  },
-];
+interface CoinInterface {
+  id: string;
+  name: string;
+  symbol: string;
+  rank: number;
+  is_new: boolean;
+  is_active: boolean;
+  type: string;
+}
 
 function Coins() {
+  const [coins, setCoins] = useState<CoinInterface[]>([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    (async () => {
+      const response = await fetch("https://api.coinpaprika.com/v1/coins");
+      const json = await response.json();
+      setCoins(json.slice(0, 100));
+      setLoading(false);
+    })();
+  }, []);
   return (
     <Container>
       <Header>
         <Title>Coin Tracker</Title>
       </Header>
-      <CoinList>
-        {coins.map((coin) => (
-          <Link to={`/${coin.id}`}>
-            <Coin key={coin.id}>{coin.name}</Coin>
-          </Link>
-        ))}
-      </CoinList>
+      {loading ? (
+        "Loading..."
+      ) : (
+        <CoinList>
+          {coins.map((coin) => (
+            <Link to={`/${coin.id}`}>
+              <Coin key={coin.id}>{coin.name}</Coin>
+            </Link>
+          ))}
+        </CoinList>
+      )}
     </Container>
   );
 }
