@@ -22,18 +22,26 @@ const Coin = styled.li`
   color: ${(p) => p.theme.textColor};
   border: 1px solid #3d3d3c;
   border-radius: 15px;
-  padding: 20px;
   margin-bottom: 15px;
-  transition: background-color 0.2s ease;
-
+  a {
+    color: ${(p) => p.theme.textColor};
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    transition: background-color 0.2s ease;
+  }
   &:hover {
-    background-color: #30336b;
-    color: ${(p) => p.theme.accentTextColor};
-    cursor: pointer;
+    background-color: #515151;
     a {
-      display: block;
+      color: ${(p) => p.theme.accentTextColor};
     }
   }
+`;
+
+const Img = styled.img`
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
 `;
 
 interface CoinInterface {
@@ -67,9 +75,14 @@ function Coins() {
       ) : (
         <CoinList>
           {coins.map((coin) => (
-            <Link to={`/${coin.id}`}>
-              <Coin key={coin.id}>{coin.name}</Coin>
-            </Link>
+            <Coin key={coin.id}>
+              <Link to={`/${coin.id}`} state={{ name: coin.name }}>
+                <Img
+                  src={`https://cryptoicon-api.pages.dev/api/icon/${coin.symbol.toLowerCase()}`}
+                ></Img>
+                {coin.name}
+              </Link>
+            </Coin>
           ))}
         </CoinList>
       )}
