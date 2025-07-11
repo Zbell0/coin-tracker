@@ -1,8 +1,8 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Router from "./Router";
 import { createGlobalStyle } from "styled-components";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-const queryClient = new QueryClient();
 const GlobalStyle = createGlobalStyle`
 /* 
 Global stype to reset the previous css style
@@ -60,14 +60,15 @@ a{
 }
 `;
 
+const queryClient = new QueryClient();
+
 function App() {
   return (
-    <>
-      <QueryClientProvider client={queryClient}>
-        <GlobalStyle></GlobalStyle>
-        <Router></Router>
-      </QueryClientProvider>
-    </>
+    <QueryClientProvider client={queryClient}>
+      <GlobalStyle />
+      <Router />
+      <ReactQueryDevtools initialIsOpen={true} />
+    </QueryClientProvider>
   );
 }
 

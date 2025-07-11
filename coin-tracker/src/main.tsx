@@ -9,6 +9,7 @@ if (!container) {
   throw new Error("Root container not found");
 }
 const root = ReactDOM.createRoot(container);
+
 root.render(
   <ThemeProvider theme={theme}>
     <App />
