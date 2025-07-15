@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { fetchCoinHistory, fetchPriceData } from "./api";
-
 import ReactApexChart from "react-apexcharts";
 import styled from "styled-components";
 
@@ -116,7 +115,7 @@ function Chart() {
                 name: "Price",
                 data: infoData
                   ? infoData.map((item) => ({
-                      x: new Date(Number(item.time_close) * 1000),
+                      x: new Date(item.time_close).getTime(),
                       y: item.close,
                     }))
                   : [],

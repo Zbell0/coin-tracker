@@ -1,4 +1,5 @@
 import { use, useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import {
   useLocation,
   useParams,
@@ -156,11 +157,23 @@ function Coin() {
   );
   const { isLoading: tickersLoading, data: tickersData } = useQuery<IPriceData>(
     ["tickers", coinId],
-    () => fetchPriceData(coinId)
+    () => fetchPriceData(coinId),
+    {
+      refetchInterval: 5000,
+    }
   );
   const loading = infoLoading || tickersLoading;
   return (
     <Container>
+      <Helmet>
+        <title>
+          {infoData?.name
+            ? infoData.name
+            : loading
+            ? "Loading.."
+            : infoData?.name}
+        </title>
+      </Helmet>
       <Header>
         <Title>
           {infoData?.name
@@ -185,7 +198,14 @@ function Coin() {
             </OverviewItem>
             <OverviewItem>
               <span>Open Source:</span>
-              <span>{infoData?.open_source ? "Yes" : "NO"}</span>
+              <span>
+                {tickersData &&
+                  new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                    maximumFractionDigits: 2,
+                  }).format(tickersData.quotes.USD.price)}
+              </span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>
